@@ -1,2 +1,2 @@
 # LetsGoProgramming
-Tasks for Go course
+## siobko boris, 513020/20001
