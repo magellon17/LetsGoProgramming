@@ -1,10 +1,6 @@
 package main
 
 func findKthLargest(nums []int, k int) int {
-	if k < 1 || k > len(nums) {
-		return -1 // Вернуть -1, если значение k находится за пределами допустимого диапазона
-	}
-
 	return quickSelect(nums, 0, len(nums)-1, k)
 }
 
