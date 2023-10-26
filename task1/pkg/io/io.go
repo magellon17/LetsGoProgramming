@@ -1,4 +1,4 @@
-package input
+package io
 
 import (
 	"fmt"
@@ -35,4 +35,8 @@ func ChooseOperator() string {
 	}
 
 	return operator
+}
+
+func OutputResult(a, b, result int, operator string) {
+	fmt.Printf("Результат: %d %s %d = %d\n", a, operator, b, result)
 }
