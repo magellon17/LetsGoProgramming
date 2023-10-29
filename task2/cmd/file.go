@@ -1,7 +1,10 @@
 package main
 
 func findKthLargest(nums []int, k int) int {
-	return quickSelect(nums, 0, len(nums)-1, k)
+	yanums := make([]int, len(nums))
+	copy(yanums, nums)
+
+	return quickSelect(yanums, 0, len(nums)-1, k)
 }
 
 func quickSelect(nums []int, left, right, k int) int {
