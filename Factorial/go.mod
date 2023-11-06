@@ -1,4 +1,4 @@
-module LetsGoProgramming/Factorial
+module go/LetsGoProgramming/Factorial
 
 go 1.21.3
 

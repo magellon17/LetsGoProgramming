@@ -1,6 +1,8 @@
 package calculations
 
 import (
+	"errors"
+
 	logr "github.com/sirupsen/logrus"
 )
 
@@ -17,9 +19,7 @@ func factorial(n int) int {
 
 func Calculate(n int, isLogged bool) (int, error) {
 	if n < 0 {
-		return 0, logr.Errorf("Число должно быть положительным: %d", n, logr.Fields{
-			"function": "factorial",
-		})
+		return 0, errors.New("factorial error: negative number")
 	}
 
 	if !isLogged {
@@ -27,7 +27,7 @@ func Calculate(n int, isLogged bool) (int, error) {
 	}
 
 	logr.Info("Start calculations...")
-	logr.Info("Calculate %d !", n)
+	logr.Infof("Calculate %d !", n)
 	result := factorial(n)
 	logr.Info("Calculations complete !")
 
