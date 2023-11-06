@@ -2,7 +2,7 @@ package main
 
 import (
 	"flag"
-	"go/LetsGoProgramming/Factorial/src/pkg/calculations"
+	"go/LetsGoProgramming/Factorial/src/internal/calculations"
 	"log"
 	"os"
 	"strconv"
