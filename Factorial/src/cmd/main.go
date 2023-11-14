@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-	loggingFlag := flag.Bool("log", false, "Enable logging")
+	loggingFlag := flag.Bool("log", false, "logging flag must be boolean")
 	flag.Parse()
 
 	args := os.Args[1:]
