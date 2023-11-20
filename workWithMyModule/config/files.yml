@@ -1,7 +1,7 @@
 files:
-  - filename: txts/file1.txt
+  - filename: ../txts/file1.txt
     substring: text
-  - filename: txts/file2.txt
+  - filename: ../txts/file2.txt
     substring: text
-  - filename: ttxs/file3.txt
+  - filename: ../ttxs/file3.txt
     substring: text

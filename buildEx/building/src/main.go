@@ -1,8 +1,12 @@
 package main
 
-var x int
-
 func main() {
-	x = 7
-	print(x)
+	a := 1
+	b := 2
+	if true {
+		add(a, b)
+	}
+}
+func add(a, b int) {
+	println(a + b)
 }
