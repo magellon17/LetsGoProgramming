@@ -10,7 +10,6 @@ import (
 )
 
 func main() {
-
 	log.SetLevel(log.WarnLevel)
 
 	if len(os.Args) < 2 {
@@ -24,13 +23,12 @@ func main() {
 	}
 
 	for _, file := range files {
-		contains, err := mod.Contains(file.Path, file.Substring)
-
+		contains, err := mod.Contains(file.Filename, file.Substring)
 		if err != nil {
 			log.Warn(err)
 			continue
 		}
 
-		fmt.Printf("File '%s' contains %s : %v\n", file.Path, file.Substring, contains)
+		fmt.Printf("File '%s' contains %s : %v\n", file.Filename, file.Substring, contains)
 	}
 }
