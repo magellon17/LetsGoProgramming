@@ -1,0 +1,33 @@
+before walk main
+.   AS tc(1) # main.go:7:6
+.   .   NAME-main.sum Class:PEXTERN Offset:0 Used int tc(1) # main.go:3:5
+.   .   LITERAL-3 int tc(1) # main.go:7:10
+.   ASOP-ADD AsOp:ADD tc(1) # main.go:8:6
+.   .   NAME-main.sum Class:PEXTERN Offset:0 Used int tc(1) # main.go:3:5
+.   .   LITERAL-1 int tc(1) # main.go:8:9
+.   PRINT tc(1) # main.go:10:7
+.   PRINT-Args
+.   .   NAME-main.sum Class:PEXTERN Offset:0 Used int tc(1) # main.go:3:5
+after walk main
+.   AS tc(1) # main.go:7:6
+.   .   NAME-main.sum Class:PEXTERN Offset:0 Used int tc(1) # main.go:3:5
+.   .   LITERAL-3 int tc(1) # main.go:7:10
+.   AS tc(1) # main.go:8:6
+.   .   NAME-main.sum Class:PEXTERN Offset:0 Used int tc(1) # main.go:3:5
+.   .   ADD int tc(1) # main.go:8:6
+.   .   .   NAME-main.sum Class:PEXTERN Offset:0 Used int tc(1) # main.go:3:5
+.   .   .   LITERAL-1 int tc(1) # main.go:8:9
+.   BLOCK tc(1) # main.go:10:7
+.   BLOCK-List
+.   .   CALLFUNC Walked tc(1) # main.go:10:7
+.   .   .   NAME-runtime.printlock Class:PFUNC Offset:0 Used FUNC-func() tc(1)
+.   .   CALLFUNC Walked tc(1) # main.go:10:7
+.   .   .   NAME-runtime.printint Class:PFUNC Offset:0 Used FUNC-func(int64) tc(1)
+.   .   CALLFUNC-Args
+.   .   .   CONVNOP int64 tc(1) # main.go:10:7
+.   .   .   .   NAME-main.sum Class:PEXTERN Offset:0 Used int tc(1) # main.go:3:5
+.   .   CALLFUNC Walked tc(1) # main.go:10:7
+.   .   .   NAME-runtime.printunlock Class:PFUNC Offset:0 Used FUNC-func() tc(1)
+
+before walk init <nil>
+after walk init <nil>
