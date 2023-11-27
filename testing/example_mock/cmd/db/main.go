@@ -2,9 +2,10 @@ package main
 
 import (
 	"database/sql"
-	dbPack "example_mock/internal/db"
 	"fmt"
 	"log"
+
+	dbPack "example_mock/internal/db"
 )
 
 func main() {
@@ -18,7 +19,7 @@ func main() {
 
 	dbService := dbPack.New(db)
 
-	names, err := dbService.GetNames()
+	names, _ := dbService.GetNames()
 
 	for _, name := range names {
 		fmt.Println(name)
