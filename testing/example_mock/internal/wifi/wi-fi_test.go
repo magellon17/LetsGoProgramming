@@ -39,6 +39,7 @@ func TestGetAdresses(t *testing.T) {
 
 		mockWifi.On("Interfaces").Return(mockIfaces(row.wifiInfos), row.errExpected)
 		actualAddrs, err := wifiService.GetAddresses()
+		expectedMacs := parseMACs(row.wifiInfos)
 
 		if row.errExpected != nil {
 			require.ErrorIs(t, err, row.errExpected, "row: %d, expected error: %w, actual error: %w", i, row.errExpected, err)
@@ -46,7 +47,6 @@ func TestGetAdresses(t *testing.T) {
 		}
 
 		require.NoError(t, err, "row: %d, error must be nil", i)
-		expectedMacs := parseMACs(row.wifiInfos)
 		require.Equal(t, expectedMacs, actualAddrs, "row: %d, expected addrs: %s, actual addrs: %s", i, expectedMacs, actualAddrs)
 	}
 }
@@ -58,6 +58,7 @@ func TestGetNames(t *testing.T) {
 
 		mockWifi.On("Interfaces").Return(mockIfaces(testRow.wifiInfos), testRow.errExpected)
 		actualNames, err := wifiService.GetNames()
+		expectedNames := parseNames(testRow.wifiInfos)
 
 		if testRow.errExpected != nil {
 			require.ErrorIs(t, err, testRow.errExpected, "row: %d, expected error: %w, actual error: %w", i, testRow.errExpected, err)
@@ -65,7 +66,6 @@ func TestGetNames(t *testing.T) {
 		}
 
 		require.NoError(t, err, "row: %d, error must be nil", i)
-		expectedNames := parseNames(testRow.wifiInfos)
 		require.Equal(t, expectedNames, actualNames, "row: %d, expected names: %s, actual names: %s", i, expectedNames, actualNames)
 	}
 }

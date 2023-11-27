@@ -8,6 +8,11 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
+type args struct {
+	columnName string
+	tableName  string
+}
+
 type rowTestDb struct {
 	names       []string
 	errExpected error
@@ -52,11 +57,6 @@ func TestSelectUniqueValues(t *testing.T) {
 	mockDB, mock, err := sqlmock.New()
 	if err != nil {
 		t.Fatalf("an error '%s' was not expected when marshaling expected json data", err)
-	}
-
-	type args struct {
-		columnName string
-		tableName  string
 	}
 
 	testTable := []struct {
