@@ -14,8 +14,8 @@ type PlayerWallet struct {
 
 func (w *PlayerWallet) getCoins() int {
 	w.mu.RLock()
+	defer w.mu.Unlock()
 	coins := w.coins
-	w.mu.RUnlock()
 
 	return coins
 }
@@ -42,25 +42,22 @@ func PayForUnitsAndBuildins(w *PlayerWallet) {
 
 func main() {
 	var (
-		//wg     sync.WaitGroup
+		wg     sync.WaitGroup
 		wallet = &PlayerWallet{coins: 5}
 	)
 
-	//wg.Add(1)
+	wg.Add(1)
 	go func() {
-		//defer wg.Done()
-		//time.Sleep(time.Duration(rand.Intn(1000)) * time.Millisecond)
+		defer wg.Done()
 
 		PayForUnitsAndBuildins(wallet)
 	}()
 
-	//wg.Add(1)
+	wg.Add(1)
 	go func() {
-		//defer wg.Done()
-		//time.Sleep(time.Duration(rand.Intn(1000)) * time.Millisecond)
+		defer wg.Done()
 
 		PayForUnitsAndBuildins(wallet)
 	}()
-	//wg.Wait()
-	time.Sleep(100 * time.Millisecond)
+	wg.Wait()
 }

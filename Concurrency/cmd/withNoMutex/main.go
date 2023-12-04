@@ -3,11 +3,21 @@ package main
 import (
 	"github.com/pkg/errors"
 	"log"
+	"sync"
 	"time"
 )
 
 type PlayerWallet struct {
 	coins int
+	mu    sync.RWMutex
+}
+
+func (w *PlayerWallet) getCoins() int {
+	w.mu.RLock()
+	defer w.mu.RUnlock()
+	coins := w.coins
+
+	return coins
 }
 
 func (w *PlayerWallet) spendCoins(amount int) error {
@@ -16,7 +26,7 @@ func (w *PlayerWallet) spendCoins(amount int) error {
 		time.Sleep(time.Millisecond)
 
 		w.coins -= amount
-		log.Printf("spent %d coins (remaining: %d)", amount, w.coins)
+		log.Printf("spent %d coins (remaining: %d)", amount, w.getCoins())
 		return nil
 	}
 	return errors.Errorf("insufficient funds: %d < %d", w.coins, amount)
@@ -29,15 +39,23 @@ func PayForUnitsAndBuildins(w *PlayerWallet) {
 }
 
 func main() {
-	wallet := &PlayerWallet{coins: 5}
+	var (
+		wg     sync.WaitGroup
+		wallet = &PlayerWallet{coins: 5}
+	)
 
+	wg.Add(1)
 	go func() {
+		defer wg.Done()
+
 		PayForUnitsAndBuildins(wallet)
 	}()
 
+	wg.Add(1)
 	go func() {
+		defer wg.Done()
+
 		PayForUnitsAndBuildins(wallet)
 	}()
-
-	time.Sleep(100 * time.Millisecond)
+	wg.Wait()
 }
